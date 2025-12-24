@@ -70,7 +70,14 @@ const menuOptions: MenuOption[] = [
     }
 }
 
-.n-menu-item-content {
-    border-radius: 24px !important;
+.n-menu-item.n-menu-item--selected {
+  border-radius: 20px !important;
+  margin: 4px 8px;
+}
+
+/* Ichidagi content */
+.n-menu-item.n-menu-item--selected
+  .n-menu-item-content {
+  border-radius: 20px !important;
 }
 </style>
