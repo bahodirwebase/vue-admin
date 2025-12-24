@@ -1,0 +1,15 @@
+@import './colors';
+@import '../abstracts/variables';
+
+:root {
+    //Variables
+    --layout-header-height: #{$header-height};
+    --layout-sidebar-width: #{$sidebar-width};
+
+    //Colors
+    --body-bg: #{$color-light-layout-bg};
+}
+
+:root[data-theme='dark'] {
+    --body-bg: #{$color-dark-layout-bg};
+}
