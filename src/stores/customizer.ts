@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 interface ICustomizerState {
   isDark: boolean,
-  skin : 'default' | 'bordered',
-  inverted : boolean,
+  skin: 'default' | 'bordered',
+  inverted: boolean,
 }
 export const useCustomizerStore = defineStore('customizer', {
   state: (): ICustomizerState => ({

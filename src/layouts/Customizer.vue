@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { IconSettings } from '@tabler/icons-vue'
+import { IconLayoutBoardSplit, IconLayoutBoardSplitFilled, IconSettings } from '@tabler/icons-vue'
 import { useCustomizerStore } from '@/stores/customizer'
 
 const show = ref(false)
@@ -12,14 +12,32 @@ const customizerStore = useCustomizerStore()
         <icon-settings class="infinite-rotate" />
     </div>
     <n-drawer v-model:show="show" :width="360" :show-mask="false">
-        <n-drawer-content title="Stoner" closable>
+        <n-drawer-content title="Customizer" closable>
+            <div>
+                <h3>Layout Skin</h3>
+                <n-grid x-gap="12" :cols="2">
+                    <n-gi>
+                        <n-card hoverable class="cursor-pointer " @click="customizerStore.setSkin('default')">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <icon-layout-board-split-filled class="mr-1" />
+                                <b>Default</b>
+                            </div>
+                        </n-card>
+                    </n-gi>
+                    <n-gi>
+                        <n-card hoverable class="cursor-pointer" @click="customizerStore.setSkin('bordered')">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <icon-layout-board-split class="mr-1" />
+                                <b>Bordered</b>
+                            </div>
+                        </n-card>
+                    </n-gi>
+                </n-grid>
+            </div>
             <n-switch :value="customizerStore.isDark" @update:value="customizerStore.toggleTheme">
                 Dark
             </n-switch>
-            <div>
-                <div @click="customizerStore.setSkin('default')">Default</div>
-                <div @click="customizerStore.setSkin('bordered')">Bordered</div>
-            </div>
+
             <n-switch :value="customizerStore.inverted" @update:value="customizerStore.toggleInverted">
                 Dark
             </n-switch>
@@ -43,14 +61,17 @@ const customizerStore = useCustomizerStore()
     align-items: center;
     justify-content: center;
 }
-.infinite-rotate{
+
+.infinite-rotate {
     animation: infiniteRotate 1.5s linear infinite;
 }
-@keyframes infiniteRotate{
-    from{
+
+@keyframes infiniteRotate {
+    from {
         transform: rotate(0deg);
     }
-    to{
+
+    to {
         transform: rotate(360deg);
     }
 }

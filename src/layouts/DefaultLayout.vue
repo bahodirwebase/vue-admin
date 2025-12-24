@@ -2,6 +2,7 @@
 import { computed } from 'vue';
 import { useCustomizerStore } from '@/stores/customizer';
 import Sidebar from '@/layouts/Sidebar/index.vue';
+import Header from '@/layouts/Header/index.vue'
 
 const customizerStore = useCustomizerStore();
 
@@ -18,7 +19,7 @@ const borderedSkin = computed(() => customizerStore.skin === 'bordered');
     </n-layout-sider>
     <n-layout class="layout-bg">
       <n-layout-header :class="['layout-header skin-default', { 'skin-bordered': borderedSkin }]">
-        {{ customizerStore.skin }}
+        <Header />
       </n-layout-header>
       <n-layout-content content-style="padding: 24px;" class="content-layout">
         <router-view></router-view>

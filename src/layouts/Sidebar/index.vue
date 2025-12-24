@@ -1,16 +1,13 @@
 <script lang="ts" setup>
 import type { MenuOption } from 'naive-ui'
 import { IconSettings, IconUser, IconCircleCheck } from '@tabler/icons-vue';
-import { NIcon } from 'naive-ui';
-import type { Component } from 'vue';
-import { ref, h } from 'vue';
+import { ref } from 'vue';
+import { useRender } from '@/composables/useRender';
 
+const { renderIcon } = useRender()
 const collapsed = ref<boolean>(false)
 const activeKey = ref<string | null>(null)
 
-function renderIcon(icon: Component) {
-    return () => h(NIcon, null, { default: () => h(icon) })
-}
 const menuOptions: MenuOption[] = [
     {
         label: 'Hear the Wind Sing',
@@ -71,13 +68,12 @@ const menuOptions: MenuOption[] = [
 }
 
 .n-menu-item.n-menu-item--selected {
-  border-radius: 20px !important;
-  margin: 4px 8px;
+    border-radius: 20px !important;
+    margin: 4px 8px;
 }
 
 /* Ichidagi content */
-.n-menu-item.n-menu-item--selected
-  .n-menu-item-content {
-  border-radius: 20px !important;
+.n-menu-item.n-menu-item--selected .n-menu-item-content {
+    border-radius: 20px !important;
 }
 </style>

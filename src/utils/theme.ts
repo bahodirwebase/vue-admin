@@ -18,7 +18,8 @@ export const themeOverrides: GlobalThemeOverrides = {
         itemTextColorActive: '#ffffff',
         itemIconColor: '#94a3b8',
         itemIconColorActive: '#ffffff',
-        // itemColorActive: 'red',
-        // itemColorActiveHover: 'red'
+        borderRadius : '16px',
+        // itemColorActive: "linear-gradient(135deg,#1e1b4b,#312e81,#4f46e5)",
+        // itemColorActiveHover: 'linear-gradient(135deg,#020617,#1e293b)'
     }
 }
