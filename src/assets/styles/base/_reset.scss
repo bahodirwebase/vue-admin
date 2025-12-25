@@ -1,5 +1,5 @@
-@import '../themes/theme';
-@import './fonts';
+@use '../abstracts/index' as *;
+@use './fonts' as *;
 
 html,
 body,

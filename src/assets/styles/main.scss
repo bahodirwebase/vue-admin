@@ -1,12 +1,10 @@
-// Themes
-@import 'themes/theme';
 
 //Abstracts
-@import 'abstracts/variables';
+@forward 'abstracts/index';
 
 // Base
-@import 'base/reset';
+@forward 'base/reset';
 
 // Layout
-@import 'layout/main';
+@forward 'layout/index';
 
