@@ -13,13 +13,22 @@ export const themeOverrides: GlobalThemeOverrides = {
     },
 
     Menu: {
-        // color: '#0f172a',
-        itemTextColor: '#cbd5f5',
-        itemTextColorActive: '#ffffff',
-        itemIconColor: '#94a3b8',
-        itemIconColorActive: '#ffffff',
+        // color: '#ffffff',
+
+        // itemTextColor: '#374151',
+        // itemTextColorHover: '#fff',
+        // itemTextColorActive: '#fff',
+
+        // itemIconColor: '#6b7280',
+        // itemIconColorHover: '#fff',
+        // itemIconColorActive: '#fff',
+
+        // colorHover: '#eee',
+        // itemColorActive: '#000',
         borderRadius : '16px',
-        // itemColorActive: "linear-gradient(135deg,#1e1b4b,#312e81,#4f46e5)",
-        // itemColorActiveHover: 'linear-gradient(135deg,#020617,#1e293b)'
+        // itemColorHover : '#eee',
+        // itemColorActiveHover : '#ddd',
+        // itemTextColorActiveHover : '#fff',
+        // itemIconColorActiveHover : '#fff'
     }
 }

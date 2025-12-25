@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import type { MenuOption } from 'naive-ui'
+import { type MenuOption } from 'naive-ui'
 import { IconSettings, IconUser, IconCircleCheck } from '@tabler/icons-vue';
 import { ref } from 'vue';
 import { useRender } from '@/composables/useRender';
 
-const { renderIcon } = useRender()
+const { renderIcon, renderLabelWithBadge } = useRender()
 const collapsed = ref<boolean>(false)
 const activeKey = ref<string | null>(null)
 
@@ -15,7 +15,7 @@ const menuOptions: MenuOption[] = [
         icon: renderIcon(IconSettings)
     },
     {
-        label: 'Pinball 1973',
+        label: renderLabelWithBadge('Pinball 1973', { value: 5, type: 'info' }),
         key: 'pinball-1973',
         icon: renderIcon(IconUser),
         disabled: false,
@@ -27,11 +27,12 @@ const menuOptions: MenuOption[] = [
         ]
     },
     {
-        label: 'A Wild Sheep Chase',
+        label: renderLabelWithBadge('Pinball 1973', { value: 5, type: 'info' }),
         key: 'a-wild-sheep-chase',
-        disabled: true,
+        disabled: false,
         icon: renderIcon(IconCircleCheck)
     },
+
 ]
 </script>
 <template>
@@ -39,7 +40,7 @@ const menuOptions: MenuOption[] = [
         <img src="@/assets/vue.svg" alt="Logo" class="app-brand__logo" />
 
         <span class="app-brand__name">
-            My Admin Template
+            Admin Template
         </span>
     </div>
     <n-menu v-model:value="activeKey" :collapsed="collapsed" :collapsed-width="64" :collapsed-icon-size="22"
