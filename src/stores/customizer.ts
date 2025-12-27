@@ -3,12 +3,14 @@ interface ICustomizerState {
   isDark: boolean,
   skin: 'default' | 'bordered',
   inverted: boolean,
+  menuCollapsed?: boolean,
 }
 export const useCustomizerStore = defineStore('customizer', {
   state: (): ICustomizerState => ({
     isDark: false,
     skin: 'default',
     inverted: false,
+    menuCollapsed : false
   }),
   actions: {
     toggleTheme() {
@@ -25,6 +27,12 @@ export const useCustomizerStore = defineStore('customizer', {
       this.inverted = !this.inverted
       this.isDark = false
       this.setThemeToBody('light')
-    }
+    },
+    onMenuCollapsed(){
+      this.menuCollapsed = true
+    },
+    onMenuExpanded(){
+      this.menuCollapsed = false
+    },
   },
 })

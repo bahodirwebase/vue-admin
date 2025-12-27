@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { type MenuOption } from 'naive-ui'
-import { IconSettings, IconUser, IconCircleCheck } from '@tabler/icons-vue';
-import { ref } from 'vue';
+import { IconSettings, IconUser, IconCircleCheck, IconBook } from '@tabler/icons-vue';
 import { useRender } from '@/composables/useRender';
+import { useCustomizerStore } from '@/stores/customizer';
 
 const { renderIcon, renderLabelWithBadge } = useRender()
-const collapsed = ref<boolean>(false)
-const activeKey = ref<string | null>(null)
+const customizerStore = useCustomizerStore();
+
 
 const menuOptions: MenuOption[] = [
     {
@@ -32,19 +32,44 @@ const menuOptions: MenuOption[] = [
         disabled: false,
         icon: renderIcon(IconCircleCheck)
     },
-
+    {
+        label: 'Dance Dance Dance',
+        key: 'Dance Dance Dance',
+        icon: renderIcon(IconBook),
+        children: [
+            {
+                type: 'group',
+                label: 'People',
+                key: 'people',
+                children: [
+                    {
+                        label: 'Narrator',
+                        key: 'narrator',
+                        icon: renderIcon(IconBook)
+                    },
+                    {
+                        label: 'Sheep Man',
+                        key: 'sheep-man',
+                        icon: renderIcon(IconBook)
+                    }
+                ]
+            },
+        ]
+    }
 ]
+
 </script>
 <template>
     <div class="app-brand">
         <img src="@/assets/vue.svg" alt="Logo" class="app-brand__logo" />
 
-        <span class="app-brand__name">
+        <span class="app-brand__name" v-if="!customizerStore.menuCollapsed">
             Admin Template
         </span>
     </div>
-    <n-menu v-model:value="activeKey" :collapsed="collapsed" :collapsed-width="64" :collapsed-icon-size="22"
-        :indent="20" :options="menuOptions" />
+    <n-menu  
+         collapsed-width="var(--layout-sidebar-collapsed-width)"
+        :indent="20" :options="menuOptions" :collapsed-icon-size="24" />
 </template>
 <style lang="scss">
 .app-brand {
@@ -76,5 +101,9 @@ const menuOptions: MenuOption[] = [
 /* Ichidagi content */
 .n-menu-item.n-menu-item--selected .n-menu-item-content {
     border-radius: 20px !important;
+}
+
+.n-menu--collapsed .n-menu-item-expand-icon {
+    display: none !important;
 }
 </style>
