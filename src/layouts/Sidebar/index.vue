@@ -60,13 +60,13 @@ const menuOptions = ref<MenuOption[]>([
                         icon: renderIcon(IconCircleDot)
                     },
                     {
-                        label: 'Buttons',
-                        key: 'buttons',
+                        label: renderCustomizeLabel('Buttons', { name: 'Buttons' }),
+                        key: 'Buttons',
                         icon: renderIcon(IconCircleDot),
                     },
                     {
-                        label: 'Cards',
-                        key: 'cards',
+                        label: renderCustomizeLabel('Cards', { name: 'Cards' }),
+                        key: 'Cards',
                         icon: renderIcon(IconCircleDot),
                     },
                     {
