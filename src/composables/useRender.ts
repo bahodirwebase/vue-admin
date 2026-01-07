@@ -1,10 +1,11 @@
 import type { Component } from 'vue'
 import { NBadge, NIcon } from 'naive-ui'
 import { h } from 'vue'
+import { RouterLink, type RouteLocationRaw } from 'vue-router'
 
 interface IOptionBadge {
-    value : number | string,
-    type  : 'default' | 'success' | 'info' | 'warning' | 'error'
+    value: number | string,
+    type: 'default' | 'success' | 'info' | 'warning' | 'error'
 }
 
 export function useRender() {
@@ -15,20 +16,25 @@ export function useRender() {
             })
         }
     }
-    const renderLabelWithBadge = (label : string, optionBadge : IOptionBadge) => {
+    const renderCustomizeLabel = (label: string, router: RouteLocationRaw, optionBadge?: IOptionBadge) => {
         return () => {
             return h(
                 'div',
-                { class: 'menu-label ', style : { display: 'flex', justifyContent : 'space-between', alignItems : 'center' } },
+                { class: 'menu-label ', style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' } },
                 [
-                    h('span',  label),
-                    h(NBadge, { value: optionBadge.value, type: optionBadge.type, class: 'mr-1' })
+                    h(RouterLink,
+                        {
+                            to: router
+                        },
+                        { default: () => label }
+                    ),
+                    h(NBadge, { value: optionBadge?.value, type: optionBadge?.type, class: 'mr-1' })
                 ]
             )
         }
     }
     return {
         renderIcon,
-        renderLabelWithBadge
+        renderCustomizeLabel
     }
 }

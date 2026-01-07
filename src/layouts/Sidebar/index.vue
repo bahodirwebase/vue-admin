@@ -1,83 +1,217 @@
 <script lang="ts" setup>
 import { type MenuOption } from 'naive-ui'
-import { IconSettings, IconUser, IconCircleCheck, IconBook } from '@tabler/icons-vue';
+import { IconStack2, IconForms, IconTable, IconChartSankey, IconIcons, IconLockPassword, IconRocket, IconCalendar, IconMessage, IconDashboard, IconApps, IconComponents, IconFiles, IconCircleDot } from '@tabler/icons-vue';
 import { useRender } from '@/composables/useRender';
 import { useCustomizerStore } from '@/stores/customizer';
+import { computed, ref } from 'vue';
+import { useRouter } from 'vue-router'
 
-const { renderIcon, renderLabelWithBadge } = useRender()
+const { renderIcon, renderCustomizeLabel } = useRender()
+const router = useRouter()
 const customizerStore = useCustomizerStore();
 
 
-const menuOptions: MenuOption[] = [
+const menuOptions = ref<MenuOption[]>([
     {
-        label: 'Hear the Wind Sing',
-        key: 'hear-the-wind-sing',
-        icon: renderIcon(IconSettings)
-    },
-    {
-        label: renderLabelWithBadge('Pinball 1973', { value: 5, type: 'info' }),
-        key: 'pinball-1973',
-        icon: renderIcon(IconUser),
-        disabled: false,
+        type: 'group',
+        label: 'Dashboards',
+        key: 'dashboards',
+        icon: renderIcon(IconDashboard),
         children: [
             {
-                label: 'Rat',
-                key: 'rat'
+                label: 'First Dashboard',
+                key: 'first-dashboard',
+                icon: renderIcon(IconDashboard)
             }
         ]
     },
     {
-        label: renderLabelWithBadge('Pinball 1973', { value: 5, type: 'info' }),
-        key: 'a-wild-sheep-chase',
-        disabled: false,
-        icon: renderIcon(IconCircleCheck)
-    },
-    {
-        label: 'Dance Dance Dance',
-        key: 'Dance Dance Dance',
-        icon: renderIcon(IconBook),
+        type: 'group',
+        label: 'Apps',
+        key: 'apps',
+        icon: renderIcon(IconApps),
         children: [
             {
-                type: 'group',
-                label: 'People',
-                key: 'people',
-                children: [
-                    {
-                        label: 'Narrator',
-                        key: 'narrator',
-                        icon: renderIcon(IconBook)
-                    },
-                    {
-                        label: 'Sheep Man',
-                        key: 'sheep-man',
-                        icon: renderIcon(IconBook)
-                    }
-                ]
+                label: 'Calendar',
+                key: 'calendar',
+                icon: renderIcon(IconCalendar)
+            },
+            {
+                label: 'Chat',
+                key: 'chat',
+                icon: renderIcon(IconMessage),
             },
         ]
+    },
+    {
+        type: 'group',
+        label: 'Components',
+        key: 'components',
+        icon: renderIcon(IconComponents),
+        children: [
+            {
+                label: 'UI Elements',
+                key: 'ui-elements',
+                icon: renderIcon(IconStack2),
+                children: [
+                    {
+                        label: renderCustomizeLabel('Alerts', { name: 'Alerts' }),
+                        key: 'Alerts',
+                        icon: renderIcon(IconCircleDot)
+                    },
+                    {
+                        label: 'Buttons',
+                        key: 'buttons',
+                        icon: renderIcon(IconCircleDot),
+                    },
+                    {
+                        label: 'Cards',
+                        key: 'cards',
+                        icon: renderIcon(IconCircleDot),
+                    },
+                    {
+                        label: 'Dropdowns',
+                        key: 'dropdowns',
+                        icon: renderIcon(IconCircleDot),
+                    },
+                    {
+                        label: 'Modals',
+                        key: 'modals',
+                        icon: renderIcon(IconCircleDot),
+                    },
+                    {
+                        label: 'Tabs',
+                        key: 'tabs',
+                        icon: renderIcon(IconCircleDot),
+                    },
+                ]
+            },
+            {
+                label: 'Forms',
+                key: 'forms',
+                icon: renderIcon(IconForms),
+                children: [
+                    {
+                        label: 'Form Elements',
+                        key: 'form-elements',
+                        icon: renderIcon(IconCircleDot),
+                        children: [
+                            {
+                                label: 'Select',
+                                key: 'select',
+                                icon: renderIcon(IconCircleDot),
+                            },
+                        ]
+                    },
+                ]
+            },
+            {
+                label: 'Tables',
+                key: 'tables',
+                icon: renderIcon(IconTable),
+                children: []
+            },
+            {
+                label: 'Charts',
+                key: 'charts',
+                icon: renderIcon(IconChartSankey),
+                children: []
+            },
+            {
+                label: 'Icons',
+                key: 'icons',
+                icon: renderIcon(IconIcons),
+            }
+        ]
+    },
+    {
+        type: 'group',
+        label: 'Pages',
+        key: 'pages',
+        icon: renderIcon(IconFiles),
+        children: [
+            {
+                label: 'Authentication',
+                key: 'authentication',
+                icon: renderIcon(IconLockPassword),
+                children: [
+                    {
+                        label: 'Authentication',
+                        key: 'authentication',
+                        icon: renderIcon(IconLockPassword),
+                    },
+                ]
+            },
+            {
+                label: 'Extra',
+                key: 'extra',
+                icon: renderIcon(IconRocket),
+                children: []
+            },
+        ]
+    },
+
+
+    // {
+    //     label: renderLabelWithBadge('Pinball 1973', { value: 5, type: 'info' }),
+    //     key: 'pinball-1973',
+    //     icon: renderIcon(IconUser),
+    //     disabled: false,
+    //     children: [
+    //         {
+    //             label: 'Rat',
+    //             key: 'rat'
+    //         }
+    //     ]
+    // },
+])
+
+const menuOptionsComputed = computed<MenuOption[]>(() => {
+    if (customizerStore.menuCollapsed) {
+
+        const arr = [] as any[]
+        menuOptions.value.forEach(options => {
+            if (options.type === 'group' && options.children) {
+                arr.push(options.children)
+            }
+        })
+        return arr.flat()
     }
-]
+    return menuOptions.value
+})
+
+const handleMenuClick = (key: string) => {
+    console.log('Menu clicked:', key);
+    router.push({ name: key });
+}
 
 </script>
 <template>
-    <div class="app-brand">
-        <img src="@/assets/vue.svg" alt="Logo" class="app-brand__logo" />
+    <div>
+        <div class="app-brand">
+            <img src="@/assets/vue.svg" alt="Logo" class="app-brand__logo" />
 
-        <span class="app-brand__name" v-if="!customizerStore.menuCollapsed">
-            Admin Template
-        </span>
+            <span class="app-brand__name" v-if="!customizerStore.menuCollapsed">
+                Admin Template
+            </span>
+        </div>
+        <PerfectScrollbar>
+            <n-menu  :collapsed-width="60" :indent="20"
+                :options="menuOptionsComputed" :collapsed-icon-size="24" @on-update:expanded-keys="handleMenuClick" />
+        </PerfectScrollbar>
     </div>
-    <n-menu  
-         collapsed-width="var(--layout-sidebar-collapsed-width)"
-        :indent="20" :options="menuOptions" :collapsed-icon-size="24" />
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
+.ps{
+    height: calc(100vh - var(--layout-header-height) - 48px);
+}
 .app-brand {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     height: calc(var(--layout-header-height) - 24px);
-    padding-left: 12px;
+
 
     &__logo {
         width: 36px;

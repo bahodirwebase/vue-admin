@@ -14,7 +14,7 @@ const borderedSkin = computed(() => customizerStore.skin === 'bordered');
   <n-layout has-sider class="admin-layout layout-bg">
     <n-layout-sider :inverted="customizerStore.inverted" :collapsed="customizerStore.menuCollapsed"
       :class="['layout-sidebar  skin-default', { 'skin-bordered': borderedSkin }]" width="var(--layout-sidebar-width)"
-      content-style="padding: 12px;" show-trigger collapsed-width="var(--layout-sidebar-collapsed-width)"
+      content-style="padding: 12px;" show-trigger :collapsed-width="86"
       collapse-mode="width" @collapse="customizerStore.onMenuCollapsed" @expand="customizerStore.onMenuExpanded">
       <Sidebar />
     </n-layout-sider>
