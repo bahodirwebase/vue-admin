@@ -13,7 +13,9 @@ const isDark = computed(() => customizerStore.isDark)
 </script>
 <template>
   <n-config-provider :theme="isDark ? darkTheme : lightTheme" :theme-overrides="themeOverrides">
-    <router-view />
-    <Customizer />
+    <n-message-provider>
+      <router-view />
+      <Customizer />
+    </n-message-provider>
   </n-config-provider>
 </template>

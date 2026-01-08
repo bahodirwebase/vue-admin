@@ -41,6 +41,9 @@ const borderedSkin = computed(() => customizerStore.skin === 'bordered');
   justify-content: flex-start;
   padding: 0 24px;
   width: calc(100% - 48px);
+  position: sticky;
+  top : 24px;
+  z-index: 2;
 }
 
 .content-layout {
@@ -53,6 +56,7 @@ const borderedSkin = computed(() => customizerStore.skin === 'bordered');
   margin: 0 !important;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px !important;
   width: 100%;
+  top : 0
 }
 
 .skin-default {

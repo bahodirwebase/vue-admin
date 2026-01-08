@@ -8,8 +8,8 @@ interface ICustomizerState {
 export const useCustomizerStore = defineStore('customizer', {
   state: (): ICustomizerState => ({
     isDark: false,
-    skin: 'default',
-    inverted: false,
+    skin: 'bordered',
+    inverted: false, 
     menuCollapsed : false
   }),
   actions: {
