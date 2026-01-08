@@ -34,6 +34,5 @@ declare module 'vue' {
     NSwitch: typeof import('naive-ui')['NSwitch']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    ScrollBar: typeof import('./src/components/ScrollBar.vue')['default']
   }
 }
